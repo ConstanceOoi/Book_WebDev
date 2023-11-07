@@ -1,0 +1,426 @@
+<html>
+<head>
+<title>Book</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="js/jquery.js"></script>
+<script src="js/jquery.dataTables.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<link rel="stylesheet" href="css/jquery.DataTables.css"/>
+<link rel="stylesheet" href="css/bootstrap.css"/>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+                  <a class="nav-link" id="home_tab" aria-current="page" href="#home"  role="tab" data-toggle="tab" ><span class="glyphicon glyphicon-home">Home</span></a>
+				</li>
+                <li class="nav-item">
+                    <a class="nav-link" id="books_tab" aria-current="page" href="#books"  role="tab" data-toggle="tab" ><span class="glyphicon glyphicon-book">Books</span></a>
+                </li>
+                <li class="nav-item">
+					<a class="nav-link" id="users_tab" aria-current="page" href="#users"  role="tab" data-toggle="tab"><span class="glyphicon glyphicon-user">Users</span></a>
+				</li>
+            </ul>
+            
+
+        </div>
+    </div>
+  </nav>
+
+  <h1 class="text-center py-4">Online Book Store Website</h1><br><br>
+ 
+ <div class="tab-content">
+	<div class="tab-pane active" id="home">
+	<h3>Welcome to Online Book Store Website</h3>
+	<p>Here you can view all the books available in the bookstore!! Have fun reading, enjoy !!</p><br>
+	<p><b><i>“The more that you read, the more things you will know. The more that you learn, the more places you’ll go.” -- Dr. Seuss</i></b></p>
+	</div>
+	
+	<!--Book Tables-->
+	  <div class="tab-pane" id="books">
+	  <ul class="nav nav-tabs" role="tablist">
+		<li class="nav-item">
+		  <a class="nav-link active" data-toggle="tab" aria-current="page" href="#books" role="tab">Home</a>
+		</li> 
+		<li class="nav-item">
+		  <button type="button" class="btn btn-light" id="addBookBtn" data-toggle="modal" data-target="#addBookForm">Add</button>
+		</li>
+	  </ul>
+	  <br><br>
+		<table id="table_id" class="display">
+			<thead>
+				<tr>
+					<!-- <th>ISBN</th>
+					<th>Name</th>
+					<th>Category</th>
+					<th>Author</th>
+					<th>Price</th>
+					<th>Publication Year</th>
+					<th>More</th>
+					<th>Action</th> -->
+					<th style="width: 10%;">ISBN</th>
+					<th>Name</th>
+					<th style="width: 1%;">Category</th>
+					<th>Author</th>
+					<th>Price</th>
+					<th>Publication Year</th>
+					<th>More</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody id="table_body">
+
+			</tbody>
+		</table>
+	  </div>
+	  
+	<div class="tab-pane" id="users">
+	  <ul class="nav nav-tabs" role="tablist">
+		<li class="nav-item">
+		<a class="nav-link active" data-toggle="tab" aria-current="page" href="#users" role="tab">Home</a>
+		</li> 
+		<li class="nav-item">
+		<button type="button" class="btn btn-light" id="addUserBtn" data-toggle="modal" data-target="#addUserForm">Add</button>
+		</li>
+	  </ul>
+	  <br><br>
+      <table id="user_table_id" class="display">
+        <thead>
+            <tr>
+                <th style= "width:10%;">No.</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone No</th>
+                <th>Address</th>
+                <th>Birthday</th>
+                <th>More</th>
+                <th>Action</th>
+            </tr>
+        <tbody id="user_table_body">
+
+        </tbody>
+      </table>
+    </div>
+
+</div>
+	
+  
+ 
+
+<!--Add Book Form-->
+  <div class="modal" id="addBookForm" tabindex="-1" role="dialog" aria-labelledby="addBookFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="addBookTitle" id="addFormLAbel">Add Book</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="addBookForm">
+          <div class="modal-body">
+            
+            <div class="form-group row">
+              <label for="isbn" class="col-sm-6 col-form-label">ISBN</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="isbn" placeholder="ISBN" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="title" class="col-sm-6 col-form-label">Title</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="title" placeholder="Title" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="synopsis" class="col-sm-6 col-form-label">Synopsis</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" id="synopsis" placeholder="Synopsis" required></textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="category" class="col-sm-6 col-form-label">Category</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="category" placeholder="Category" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="author" class="col-sm-6 col-form-label">Author</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="author" placeholder="Author" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="publisher" class="col-sm-6 col-form-label">Publisher</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="publisher" placeholder="Publisher" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="price" class="col-sm-6 col-form-label">Price</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="price" placeholder="Price" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="publishYear" class="col-sm-6 col-form-label">Publication Year</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="publishYear" placeholder="Publication Year" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="btnAddBook" data-dismiss="modal">Submit</button>
+            </div>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <!--Book Details-->
+  <div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Book Details</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body" id="contents">
+                            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+
+  <!--Edit Book Form-->
+  <div class="modal" id="editBookForm" tabindex="-1" role="dialog" aria-labelledby="editBookFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="editBookTitle" id="editFormLAbel">Edit Book</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="editBookForm">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="isbn" class="col-sm-6 col-form-label">ISBN</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="isbn" name="isbn" placeholder="ISBN" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="title" class="col-sm-6 col-form-label">Title</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="synopsis" class="col-sm-6 col-form-label">Synopsis</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" id="synopsis" name="synopsis" placeholder="Synopsis" required></textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="category" class="col-sm-6 col-form-label">Category</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="category" name="category" placeholder="Category" required>
+                <input type="hidden" class="form-control" id="category">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="author" class="col-sm-6 col-form-label">Author</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="author" name="author" placeholder="Author" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="publisher" class="col-sm-6 col-form-label">Publisher</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="publisher" name="publisher" placeholder="Publisher" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="price" class="col-sm-6 col-form-label">Price</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="price" name="price" placeholder="Price" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="publishYear" class="col-sm-6 col-form-label">Publication Year</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="publishYear" name="publishYear" placeholder="Publication Year" required>
+              </div>
+            </div>
+            <input type="hidden" class="form-control" id="id" name="id">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" data-dismiss="modal" id="btnEditBook" data-id="id">Save</button>
+            </div>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="modal" id="addUserForm" tabindex="-1" role="dialog" aria-labelledby="addUserFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="addUserTitle" id="addFormLAbel">Add User</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="addUserForm">
+          <div class="modal-body">
+            
+            <div class="form-group row">
+              <label for="name" class="col-sm-6 col-form-label">Name</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="name" placeholder="Name" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email" class="col-sm-6 col-form-label">Email</label>
+              <div class="col-sm-6">
+                <input type="email" class="form-control" id="email" placeholder="Email" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="phoneNo" class="col-sm-6 col-form-label">Phone No.</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="phoneNo" placeholder="Phone No." required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="address" class="col-sm-6 col-form-label">Address</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="address" placeholder="Address" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="birthDate" class="col-sm-6 col-form-label">Birthday</label>
+              <div class="col-sm-6">
+                <input type="date" class="form-control" id="birthDate" value="date" data-date="" data-date-format="YYYY-MM-DD" placeholder="Birthday" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="password" class="col-sm-6 col-form-label">Password</label>
+              <div class="col-sm-6">
+                <input type="password" class="form-control" id="password" placeholder="Password" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="btnAddUser" data-dismiss="modal">Add</button>
+            </div>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <div class="modal" id="userModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">User Details</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body" id="user_contents">
+                            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <div class="modal" id="editUserForm" tabindex="-1" role="dialog" aria-labelledby="editUserFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="editUserTitle" id="editFormLAbel">Edit User</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="editUserForm">
+          <div class="modal-body">
+            
+            <div class="form-group row">
+              <label for="name" class="col-sm-6 col-form-label">Name</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email" class="col-sm-6 col-form-label">Email</label>
+              <div class="col-sm-6">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="phoneNo" class="col-sm-6 col-form-label">Phone No.</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="phoneNo" name="phoneNo" placeholder="Phone No." required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="address" class="col-sm-6 col-form-label">Address</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="birthDate" class="col-sm-6 col-form-label">Birthday</label>
+              <div class="col-sm-6">
+                <input type="date" class="form-control" id="birthDate" name="birthDate" value="date" data-date="" data-date-format="YYYY-MM-DD" placeholder="Birthday" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="password" class="col-sm-6 col-form-label">Password</label>
+              <div class="col-sm-6">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+              </div>
+            </div>
+            <input type="hidden" class="form-control" id="user_id" name="id">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" id="btnEditUser" data-dismiss="modal" data-id="user_id">Save</button>
+            </div>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+</html>
